@@ -2,7 +2,7 @@
 Repository CRUD API untuk tugas sebelum UTS (MK Pengembangan Aplikasi Web)
 
 
-# Member
+## Member
 
 | No  | Nama                        | NIM          |
 |-----|-----------------------------|---------------------|
@@ -13,7 +13,7 @@ Repository CRUD API untuk tugas sebelum UTS (MK Pengembangan Aplikasi Web)
 | 5   | Syaifullah Hilmi Ma’arij     | 22/497775/TK/54568  |
 
 
-# Note:
+## Note:
 1. Setelah clone repo, ketik `npm i` di terminal.
 2. Jangan lupa untuk bikin local branch dengan nama kalian masing-masing.
 3. Selalu push ke remote branch.
