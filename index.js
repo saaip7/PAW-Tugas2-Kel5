@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const process = require("process");
 const app = express();
-const port = 3000;
 
 // DOTENV CONFIG
 dotenv.config();
@@ -21,20 +20,25 @@ app.use(morgan("dev"));
 // CORS
 app.use(cors());
 
-// SERVER
-mongoose.connect(`${process.env.mongoDB2}`)
+// MONGODB CONNECTION
+if (!process.env.MONGO_URI) {
+  throw Error("Database connection string not found");
+}
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("Connected to MongoDB")
-  })
-  .catch((err) => {
+    console.log("Succesfully connected to MongoDB");
+  }).catch((err) => {
+    console.log("Failed to connect to MongoDB");
     console.log(err);
   });
 
-
-// Use the routes
-app.use('/tes', require('./src/routes/tesRoutes'));
+// ROUTES
+app.get("/", (req, res) => {
+  res.send("Hello from PAW Backend Service!");
+});
+app.use("/user", require("./src/routes/UserRoutes"));
 
 // APP START
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
+app.listen(5000, () => {
+  console.log("Server is running on http://localhost:5000");
 });
