@@ -21,6 +21,5 @@ const tesSchema = mongoose.Schema({
     }
 )
 
-const tes = mongoose.model('tes', tesSchema)
 
-module.exports = tes;
+module.exports = mongoose.model('tes', tesSchema)
