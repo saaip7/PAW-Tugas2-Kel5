@@ -37,6 +37,7 @@ app.get("/", (req, res) => {
   res.send("Hello from PAW Backend Service!");
 });
 app.use("/user", require("./src/routes/UserRoutes"));
+app.use("/kamar", require("./src/routes/KamarRoutes"));
 
 // APP START
 app.listen(5000, () => {
