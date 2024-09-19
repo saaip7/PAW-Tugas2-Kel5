@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
+const cors = require('./src/config/corsConfig');
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const process = require("process");
@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 // CORS
-app.use(cors());
+app.use(cors);
 
 // MONGODB CONNECTION
 if (!process.env.MONGO_URI) {
@@ -37,6 +37,7 @@ app.get("/", (req, res) => {
   res.send("Hello from PAW Backend Service!");
 });
 app.use("/user", require("./src/routes/UserRoutes"));
+app.use("/kamar", require("./src/routes/KamarRoutes"));
 
 // APP START
 app.listen(5000, () => {
