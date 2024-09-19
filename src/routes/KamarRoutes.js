@@ -8,12 +8,12 @@ kamarRouter.get("/", getAllKamar);
 kamarRouter.get("/:nomorKamar", getKamarByNomorKamar);
 
 // Membuat kamar baru
-kamarRouter.post("/create", createKamar);
+kamarRouter.post("/", createKamar);
 
 // Mengupdate kamar berdasarkan ID
-kamarRouter.put("/update/:id", updateKamar);
+kamarRouter.put("/:id", updateKamar);
 
 // Menghapus kamar berdasarkan ID
-kamarRouter.delete("/:delete/id", deleteKamar);
+kamarRouter.delete("/:id", deleteKamar);
 
 module.exports = kamarRouter;
