@@ -23,7 +23,7 @@ exports.createUser = async (req, res) => {
     });
 };
 
-exports.readUser = async (req, res) => {
+exports.getAllUsers = async (req, res) => {
   User.find()
     .then((users) => {
       res.status(200).json({
@@ -36,6 +36,22 @@ exports.readUser = async (req, res) => {
       });
     });
 };
+
+exports.getUserByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const user = await User.findOne({ name: { $regex: new RegExp(name, 'i') } }); // not case sensitive
+
+    if (!user) {
+      return res.status(404).json({ message: `User with name ${name} not found` });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
