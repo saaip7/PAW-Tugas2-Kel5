@@ -1,15 +1,23 @@
 const Booking = require("../models/BookingModels");
+const User = require("../models/UserModels");
+const Kamar = require("../models/KamarModels");
 
 // POST: Membuat booking baru
 exports.createBooking = async (req, res) => {
-    const { user, kamar, checkIn, checkOut, totalPrice } = req.body;
+    const { userId, kamarId, checkIn, checkOut, totalPrice } = req.body;
+    const user = await User.findById(userId);
+    const kamar = await Kamar.findById(kamarId);
 
+    // cek ketersediaan kamar
+    if (kamar.availability === 'true') {
+        return res.status(400).json({ message: 'Kamar sudah dipesan. Silakan pesan kamar lain' });
+    }
     const booking = new Booking({
-        user,
-        kamar,
+        userId: userId,
+        kamarId: kamarId,
         checkIn,
         checkOut,
-        totalPrice
+        totalPrice,
     });
 
     booking
@@ -28,6 +36,8 @@ exports.createBooking = async (req, res) => {
                 error: err
             });
         });
+    // update ketersediaan kamar
+    await Kamar.findByIdAndUpdate(kamarId, {availability: false});
 };
 
 // GET: Mendapatkan semua booking

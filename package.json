@@ -1,7 +1,7 @@
 {
   "name": "paw-tugas2-kel5",
   "version": "1.0.0",
-  "description": "",
+  "description": "Repository CRUD API untuk tugas sebelum UTS (MK Pengembangan Aplikasi Web)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -21,6 +21,6 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.5"
   }
 }

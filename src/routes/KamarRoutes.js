@@ -9,7 +9,6 @@ kamarRouter.get("/:nomorKamar", getKamarByNomorKamar);
 
 // Membuat kamar baru
 kamarRouter.post("/", createKamar);
-
 // Mengupdate kamar berdasarkan ID
 kamarRouter.put("/:id", updateKamar);
 
