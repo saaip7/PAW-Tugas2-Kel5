@@ -43,8 +43,8 @@ exports.createBooking = async (req, res) => {
 // GET: Mendapatkan semua booking
 exports.getAllBooking = async (req, res) => {
     Booking.find()
-        .populate("customer") // Mengisi detail customer (menggunakan relasi)
-        .populate("room")     // Mengisi detail kamar (menggunakan relasi)
+        .populate("userId") // Mengisi detail customer (menggunakan relasi)
+        .populate("kamarId")     // Mengisi detail kamar (menggunakan relasi)
         .then((bookings) => {
             res.status(200).json({
                 data: bookings
@@ -62,8 +62,8 @@ exports.getBookingById = async (req, res) => {
     const { id } = req.params;
 
     Booking.findById(id)
-        .populate("user") // Mengisi detail user
-        .populate("kamar")     // Mengisi detail kamar
+        .populate("userId") // Mengisi detail user
+        .populate("kamarId")     // Mengisi detail kamar
         .then((booking) => {
             if (!booking) {
                 return res.status(404).json({
