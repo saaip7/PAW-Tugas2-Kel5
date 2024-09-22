@@ -100,3 +100,25 @@ exports.deleteKamar = async (req, res) => {
         });
     });
 };
+
+// GET: Filter kamar berdasarkan roomType
+exports.filterKamarbyType = async (req, res) => {
+    const { roomType } = req.params;
+
+    Kamar.find({ roomType })
+    .then((kamar) => {
+        if (kamar.length === 0) {
+            return res.status(404).json({
+                message: "Kamar dengan tipe tersebut tidak ditemukan"
+            });
+        }
+        res.status(200).json({
+            data: kamar
+        });
+    })
+    .catch((err) => {
+        res.status(500).json({
+            error: err.message
+        });
+    });
+};
