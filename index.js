@@ -40,6 +40,7 @@ app.use("/user", require("./src/routes/UserRoutes"));
 app.use("/kamar", require("./src/routes/KamarRoutes"));
 app.use("/booking", require("./src/routes/bookingRoutes"));
 app.use("/payment", require("./src/routes/paymentRoutes"));
+app.use("/review", require("./src/routes/ReviewRoutes"));
 
 // APP START
 app.listen(5000, () => {
