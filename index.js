@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const cors = require('./src/config/corsConfig');
+const cors = require('./api/config/corsConfig');
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const process = require("process");
@@ -36,11 +36,11 @@ mongoose.connect(process.env.MONGO_URI)
 app.get("/", (req, res) => {
   res.send("Hello from PAW Backend Service!");
 });
-app.use("/user", require("./src/routes/UserRoutes"));
-app.use("/kamar", require("./src/routes/KamarRoutes"));
-app.use("/booking", require("./src/routes/bookingRoutes"));
-app.use("/payment", require("./src/routes/paymentRoutes"));
-app.use("/review", require("./src/routes/ReviewRoutes"));
+app.use("/user", require("./api/routes/UserRoutes"));
+app.use("/kamar", require("./api/routes/KamarRoutes"));
+app.use("/booking", require("./api/routes/bookingRoutes"));
+app.use("/payment", require("./api/routes/paymentRoutes"));
+app.use("/review", require("./api/routes/ReviewRoutes"));
 
 // APP START
 app.listen(5000, () => {
