@@ -41,7 +41,7 @@ export default function LandingPage() {
           <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Fasilitas
           </Link>
-          <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          <Link href="/rooms" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Kamar
           </Link>
           <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
@@ -76,10 +76,10 @@ export default function LandingPage() {
           </div>
         </section>
         <section id="rooms" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="space-y-4 mb-8">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="space-y-4 mb-8 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Berbagai Tipe Kamar Tersedia</h2>
-              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <p className="max-w-[700px] mx-auto text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Kamar kami dirancang untuk memberikan kenyamanan dan kemewahan yang tak tertandingi, dengan pemandangan
               </p>
             </div>
@@ -88,7 +88,7 @@ export default function LandingPage() {
                 <img
                   src="/single.png"
                   alt="kamar single"
-                  className="w-full h-[300px] object-cover"
+                  className="w-full h-[300px] object-cover rounded-lg"
                   width="600"
                   height="400"
                   style={{ aspectRatio: "600/400", objectFit: "cover" }}
@@ -109,9 +109,9 @@ export default function LandingPage() {
               </div>
               <div className="flex flex-col bg-card rounded-lg overflow-hidden">
                 <img
-                  src="/double.svg"
+                  src="/double.jpg"
                   alt="Room 2"
-                  className="w-full h-[300px] object-cover"
+                  className="w-full h-[300px] object-cover rounded-lg"
                   width="600"
                   height="400"
                   style={{ aspectRatio: "600/400", objectFit: "cover" }}
@@ -134,7 +134,7 @@ export default function LandingPage() {
                 <img
                   src="/deluxe.jpg"
                   alt="Room 3"
-                  className="w-full h-[300px] object-cover"
+                  className="w-full h-[300px] object-cover rounded-lg"
                   width="600"
                   height="400"
                   style={{ aspectRatio: "600/400", objectFit: "cover" }}
@@ -153,14 +153,15 @@ export default function LandingPage() {
                   </Link>
                 </div>
               </div>
-          </div>
+            </div>
           </div>
         </section>
+
         <section id="amenities" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-          <div className="container px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6">
             <div className="space-y-4 mb-8">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Unparalleled Amenities</h2>
-              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">Fasilitas Terbaik Kami</h2>
+              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto text-center">
                 Discover the exceptional amenities that make our hotel the ultimate destination for relaxation and
                 indulgence.
               </p>
@@ -218,10 +219,10 @@ export default function LandingPage() {
           </div>
         </section>
         <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6">
             <div className="space-y-4 mb-8">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">What Our Guests Say</h2>
-              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">What Our Guests Say</h2>
+              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto text-center">
                 Hear from our satisfied guests and discover why our hotel is the premier choice for discerning
                 travelers.
               </p>
@@ -279,10 +280,10 @@ export default function LandingPage() {
           </div>
         </section>
         <section id="contact" className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-          <div className="container px-4 md:px-6">
+          <div className="container mx-auto px-4 md:px-6">
             <div className="space-y-4 mb-8 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Get in Touch</h2>
-              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center">Get in Touch</h2>
+              <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mx-auto text-center">
                 Have any questions or want to book your stay? Our team is here to assist you.
               </p>
             </div>

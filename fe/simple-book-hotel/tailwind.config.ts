@@ -5,6 +5,7 @@ export default {
   content: [
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/app/**/*.{js,ts,jsx,tsx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx}", // Tambahkan ini untuk memantau class di folder pages
   ],
   theme: {
     extend: {

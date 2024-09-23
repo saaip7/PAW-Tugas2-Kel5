@@ -44,5 +44,5 @@ app.use("/review", require("./api/routes/ReviewRoutes"));
 
 // APP START
 app.listen(5000, () => {
-  console.log("Server is running on http://localhost:5000");
+  console.log("Server is running on http://localhost:5000/api");
 });
