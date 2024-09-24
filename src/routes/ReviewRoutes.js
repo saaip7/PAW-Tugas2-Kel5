@@ -5,7 +5,7 @@ reviewRouter.post("/", createReview);
 reviewRouter.get("/", getAllReviews);
 reviewRouter.get("/kamar/:kamarId", getReviewsByKamar);
 reviewRouter.delete("/:id", deleteReview);
-reviewRouter.get("/rating", getReviewsByRating);
-reviewRouter.get("/time", getReviewsByTime);
+reviewRouter.get("/rating/:rating", getReviewsByRating);
+reviewRouter.get("/time/:date", getReviewsByTime);
 
 module.exports = reviewRouter;
