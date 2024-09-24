@@ -70,41 +70,50 @@ exports.deleteReview = async (req, res) => {
 
 // GET: Filter review berdasarkan rating
 exports.getReviewsByRating = async (req, res) => {
-    const { rating } = req.query; // Mengambil nilai rating dari query parameter
+    const { rating } = req.params;
 
-    // Validasi input rating
-    if (!rating || isNaN(rating) || rating < 1 || rating > 5) {
-        return res.status(400).json({ message: "Rating harus berupa angka antara 1 hingga 5" });
+    // Pastikan rating adalah angka valid antara 1 dan 5
+    if (isNaN(rating) || rating < 1 || rating > 5) {
+        return res.status(400).json({ message: "Rating tidak valid. Harus antara 1 hingga 5" });
     }
 
     try {
-        // Mengambil review berdasarkan rating dan populate userId serta kamarId
-        const reviews = await Review.find({ rating: rating }).populate("userId kamarId");
-
-        // Jika tidak ada review yang ditemukan
+        const reviews = await Review.find({ rating }).populate("userId kamarId");
         if (reviews.length === 0) {
-            return res.status(404).json({ message: "Tidak ada review dengan rating ini" });
+            return res.status(404).json({ message: `Tidak ada review dengan rating ${rating}` });
         }
 
-        // Jika review ditemukan, kirimkan respons dengan data
         res.status(200).json({ data: reviews });
-    } catch (error) {
-        // Menangani error dari query ke database
-        res.status(500).json({ message: "Terjadi kesalahan ketika mengambil data review", error: error.message });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
 
 // GET: Filter review berdasarkan waktu terbaru
 exports.getReviewsByTime = async (req, res) => {
+    const { date } = req.params;
+
+    // Pastikan tanggal valid
+    const searchDate = new Date(date);
+    if (isNaN(searchDate.getTime())) {
+        return res.status(400).json({ message: "Tanggal tidak valid. Format yang benar adalah YYYY-MM-DD." });
+    }
+
     try {
-        // Mengambil review, populate userId dan kamarId, lalu urutkan berdasarkan waktu terbaru (createdAt)
-        const reviews = await Review.find()
+        // Tentukan rentang waktu dari awal hingga akhir hari
+        const startOfDay = new Date(searchDate.setHours(0, 0, 0, 0));
+        const endOfDay = new Date(searchDate.setHours(23, 59, 59, 999));
+
+        // Cari review yang dibuat di antara rentang waktu tersebut
+        const reviews = await Review.find({
+            createdAt: { $gte: startOfDay, $lte: endOfDay }
+        })
             .populate("userId kamarId")
-            .sort({ createdAt: -1 }); // Urutkan berdasarkan waktu terbaru (descending)
+            .sort({ createdAt: -1 }); // Urutkan dari yang terbaru
 
         // Jika tidak ada review yang ditemukan
         if (reviews.length === 0) {
-            return res.status(404).json({ message: "Belum ada review yang tersedia" });
+            return res.status(404).json({ message: `Tidak ada review pada tanggal ${date}` });
         }
 
         // Jika review ditemukan, kirimkan respons dengan data
