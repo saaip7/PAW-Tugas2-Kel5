@@ -13,15 +13,15 @@ exports.createBooking = async (req, res) => {
         }
 
         // Pastikan checkIn dan checkOut adalah objek Date
-        const checkIn = new Date(checkIn);
-        const checkOut = new Date(checkOut);
+        const checkInDate = new Date(checkIn);
+        const checkOutDate = new Date(checkOut);
 
-        if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime())) {
+        if (isNaN(checkInDate.getTime()) || isNaN(checkOutDate.getTime())) {
             return res.status(400).json({ message: "Tanggal tidak valid" });
         }
 
         // Hitung jumlah malam
-        const numberOfNights = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
+        const numberOfNights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
 
         if (numberOfNights <= 0) {
             return res.status(400).json({ message: "Check-out date harus lebih besar dari check-in date" });
@@ -30,10 +30,10 @@ exports.createBooking = async (req, res) => {
         const totalPrice = numberOfNights * kamar.pricePerNight;
 
         const booking = new Booking({
-            user: userId,
-            kamar: kamarId,
-            checkInDate: checkIn,
-            checkOutDate: checkOut,
+            userId: userId,
+            kamarId: kamarId,
+            checkIn: checkInDate,
+            checkOut: checkOutDate,
             totalPrice,
         });
 
@@ -84,18 +84,27 @@ exports.updateBooking = async (req, res) => {
             return res.status(404).json({ message: "Booking tidak ditemukan" });
         }
 
+        // Only update the status without revalidating other fields
         booking.status = status;
-        await booking.save();
+
+        // Use findByIdAndUpdate to update only the 'status' field
+        const updatedBooking = await Booking.findByIdAndUpdate(
+            id,
+            { status },
+            { new: true, runValidators: false } // Disable validators for other fields
+        );
 
         if (status === "cancelled") {
             await Kamar.findByIdAndUpdate(booking.kamar, { availability: true });
         }
 
-        res.status(200).json({ message: "Status booking diperbarui", data: booking });
+        res.status(200).json({ message: "Status booking diperbarui", data: updatedBooking });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
+
 
 // DELETE: Menghapus booking
 exports.deleteBooking = async (req, res) => {
